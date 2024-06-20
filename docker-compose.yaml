@@ -1,0 +1,49 @@
+
+services:
+  vote:
+    image: kodekloud/examplevotingapp_vote:v1
+    ports:
+      - 30003:80
+    depends_on:
+      - redis
+    networks:
+      - back-tier
+      - front-tier
+  result:
+    image: kodekloud/examplevotingapp_result:v1
+    ports:
+      - 30002:80
+    depends_on:
+      - db
+    networks:
+      - back-tier
+      - front-tier
+  worker:
+    image: kodekloud/examplevotingapp_worker:v1
+    depends_on:
+      - redis
+      - db
+    networks:
+        - back-tier
+  redis:
+    image: redis
+    networks:
+      - back-tier 
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - "db-data:/var/lib/postgresql/data"  
+    networks:
+      - back-tier          
+
+volumes:
+  db-data:
+
+networks:
+  back-tier:
+  front-tier:
+  
