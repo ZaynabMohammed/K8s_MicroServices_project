@@ -1,4 +1,5 @@
 ## Example Voting App Kubernetes
+## Docker Compose and K8s practice project from Mumshad Mannambeth
 
 This is based on the original [example-voting-app](https://github.com/dockersamples/example-voting-app) repository from the [docker-examples](https://github.com/dockersamples) GitHub page
 
